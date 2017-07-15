@@ -1,0 +1,18 @@
+= simple_form_for @user do |f|
+  .ui.segments
+    .ui.segment
+      .ui.three.column.stackable.grid
+        .column = f.association :person, include_blank: true
+        .column
+          = f.association :roles, as: :check_boxes, collection: Role.all,
+            label_method: proc { |l| l.name.titleize }
+        .column
+          p = t('.disable')
+          = f.input :disabled, wrapper: :ui_toggle_checkbox
+      - unless @user.persisted?
+        .ui.three.column.stackable.grid
+          .column = f.input :password
+          .column = f.input :password_confirmation
+    .ui.bottom.attached.secondary.segment
+      = f.button :submit
+      = f.button :cancel

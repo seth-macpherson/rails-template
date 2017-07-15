@@ -1,0 +1,49 @@
+.ui.fitted.secondary.menu
+  .header.item
+    h1.ui.header
+      .content Changelog
+
+= paginate @resources_value
+
+.ui.icon.buttons
+  button.ui.green.button.toggle.show.all title=t(:expand_all)
+    i.expand.icon
+  button.ui.orange.button.toggle.hide.all title=t(:collapse_all)
+    i.compress.icon
+
+- @versions.each do |v|
+  .ui.top.attached.segment.toggler class=v.event_color
+    .ui.grid
+      .ui.three.wide.column
+        = v.event_with_icon
+      .ui.six.wide.column
+        - if v.item_path.present?
+          = link_to v.item_description, v.item_path
+        - else
+          = v.item_description
+      .ui.three.wide.column = timeago v.created_at
+      .ui.four.wide.column
+        = t(:by_person, person: v.modified_by)
+  .ui.bottom.attached.segment.hidden.toggleable
+    - if v.event == 'update'
+      table.ui.very.compact.table
+        - v.changeset.each do |field, values|
+          - diff = v.diff_change(*values)
+          tr
+            td.two.wide.column = v.attr_name(field)
+            td.seven.wide.column == diff.left
+            td.seven.wide.column == diff.right
+    - if v.event == 'create'
+      table.ui.very.compact.table
+        - v.changeset.each do |field, values|
+          tr
+            td.two.wide = v.attr_name(field)
+            td.twelve.wide = v.format_value(values[1])
+    - if v.event == 'destroy'
+      table.ui.very.compact.table
+        - v.object_deserialized.each do |field, value|
+          tr
+            td.two.wide = v.attr_name(field)
+            td.twelve.wide = v.format_value(value)
+
+= paginate @resources_value

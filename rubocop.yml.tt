@@ -1,95 +1,27 @@
 AllCops:
-  DisplayCopNames: true
-  DisplayStyleGuide: true
-  TargetRubyVersion: <%= RUBY_VERSION[/\d+\.\d+/] %>
-  Exclude:
-    - "bin/*"
-    - Capfile
-    - config/boot.rb
-    - config/environment.rb
-    - config/initializers/version.rb
-    - db/schema.rb
-    - "tmp/**/*"
-    - Gemfile
-    - Guardfile
+  Include:
     - Rakefile
-
-Layout/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
-
-Metrics/AbcSize:
+    - Guardfile
+    - Gemfile
+    - config.ru
+    - lib/**/*.rake
   Exclude:
-    - "test/**/*"
-
-Metrics/BlockLength:
-  Exclude:
-    - "config/**/*"
-    - "test/**/*"
-
-Metrics/ClassLength:
-  Exclude:
-    - "test/**/*"
-
-Metrics/LineLength:
-  Exclude:
-    - "config/**/*"
-    - "db/**/*"
-
-Metrics/MethodLength:
-  Max: 12
-  Exclude:
-    - "db/migrate/*"
-    - "test/**/*"
-
-Performance/Casecmp:
-  Enabled: false
+    - db/schema.rb
+    - config.ru
+    - lib/**/*.rake
+    - vendor/**/*
+    - bin/*
+    - node_modules/**/*
 
 Rails:
   Enabled: true
 
-Rails/Validation:
-  Enabled: false
-
-Rails/ApplicationRecord:
+# When seeding you want to output information to the console
+Rails/Output:
   Exclude:
-    - "db/migrate/**"
+    - db/seeds.rb
 
-Style/BarePercentLiterals:
-  EnforcedStyle: percent_q
-
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Style/Documentation:
-  Exclude:
-    - "app/controllers/application_controller.rb"
-    - "app/helpers/**/*_helper.rb"
-    - "app/mailers/**/*_mailer.rb"
-    - "app/models/application_record.rb"
-    - "config/**/*"
-    - "db/**/*"
-    - "test/**/*"
-
-Style/DoubleNegation:
-  Enabled: false
-
-Style/EmptyMethod:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
-
-Style/NumericPredicate:
-  Enabled: false
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-
-Style/TrivialAccessors:
-  AllowPredicates: true
-
-Style/VariableNumber:
-  Enabled: false
+# Use the standard github rubocop rules and rails rules
+inherit_from:
+  - .rubocop.github.yml
+  - .rubocop.rails.yml

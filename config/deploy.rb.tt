@@ -1,9 +1,20 @@
-set :application, "<%= app_name %>"
-set :repo_url, "<%= git_repo_specified? ? git_repo_url : "TODO" %>"
+set :application,   "<%= app_name %>"
+set :repo_url,      "<%= git_repo_specified? ? git_repo_url : "TODO" %>"
+set :keep_releases, 10
+set :deploy_via,    :remote_cache
+
+set :rvm_type,         :system
+set :rvm_ruby_version, File.read('.ruby-version').strip
+
+set :deploy_to, "/home/rails-kohtaoapp.com/app"
+
+set :linked_dirs, fetch(:linked_dirs, []).push(%w[log tmp/pids tmp/cache tmp/sockets public/system])
+
+set :rollbar_token, ENV.fetch("ROLLBAR_SERVER_TOKEN")
+set :rollbar_env,   proc { fetch :stage }
+set :rollbar_role,  proc { :app }
 
 # Project-specific overrides go here.
-# For list of variables that can be customized, see:
-# https://github.com/mattbrictson/capistrano-mb/blob/master/lib/capistrano/tasks/defaults.rake
 
 fetch(:mb_recipes) << "sidekiq"
 fetch(:mb_aptitude_packages)["redis-server@ppa:chris-lea/redis-server"] = :redis

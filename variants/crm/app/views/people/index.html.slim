@@ -1,0 +1,20 @@
+= render 'shared/index_header'
+
+table.ui.table
+  thead
+    tr
+      th = attr_name(:name)
+      th = attr_name(:email)
+      th = attr_name(:phone)
+
+  tbody
+    - @people.each do |person|
+      tr
+        td
+          = link_to_record person
+          - if person.birthday_today?
+            i.purple.birthday.icon title=t(:happy_birthday) style='margin-left: .2em'
+        td = person.email
+        td = person.phone
+
+= render 'shared/index_footer'

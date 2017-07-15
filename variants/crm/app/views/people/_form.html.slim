@@ -1,0 +1,14 @@
+= simple_form_for @person do |f|
+  .ui.segments
+    .ui.segment
+      .ui.two.column.stackable.grid
+        .column = f.input :first_name
+        .column = f.input :last_name
+    .ui.segment
+      .ui.three.column.stackable.grid
+        .column = f.input :email
+        .column = f.input :phone
+        .column = f.input :born_on, as: :string, placeholder: 'YYYY-MM-DD'
+    .ui.bottom.attached.secondary.segment
+      = f.button :submit
+      = f.button :cancel

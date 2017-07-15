@@ -1,0 +1,18 @@
+// TODO: This isn't the right way to do this. It should be an object that
+// generates HTML. Such as...
+//
+// = record_header @record do |rh|
+//   rh.show_buttons = true
+// end
+.ui.fitted.secondary.menu
+  .header.item
+    h1.ui.header
+      .content
+        = record_header.primary_description
+      - if record_header.secondary_description?
+        .sub.header
+          = record_header.secondary_description
+  .right.menu
+    .item = edit_record_button record_header
+    .item = changelog_button record_header
+    .item = delete_record_button record_header

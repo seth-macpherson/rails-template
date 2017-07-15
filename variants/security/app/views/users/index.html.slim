@@ -1,0 +1,24 @@
+= render 'shared/index_header'
+
+table.ui.table
+  thead
+    tr
+      th = attr_name(:email)
+      th = attr_name(:person)
+      th = attr_name(:roles)
+      th = attr_name(:last_sign_in_at)
+  - @users.each do |user|
+    tr
+      td = link_to_record user
+      td = link_to_record user.person
+      td
+        - if user.disabled?
+          i.red.circle.icon title='DISABLED'
+        - else
+          i.green.circle.icon title='Account Enabled'
+        = user.roles_list
+      td
+        - if user.last_sign_in_at?
+          = timeago user.last_sign_in_at
+        - else
+          em Never

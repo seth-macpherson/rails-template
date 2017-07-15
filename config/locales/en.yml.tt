@@ -1,0 +1,73 @@
+en:
+  site_name: "<%= app_name.titleize %>"
+  site_title: "<%= app_name.titleize %>"
+  mobile_web_app_title: "<%= app_name.titleize %>"
+  date:
+    formats:
+      short: "%-d %b %Y"   # 9 Nov 2016
+      default: "%-d %B %Y" # 9 November 2016
+      datestamp: "%F"      # 2016-11-09
+  time:
+    formats:
+      default: "%H:%M"
+      short: "%k:%M"
+      timestamp: "%FT%RZ"
+
+  buttons:
+    new: "New %{type}"
+    edit: Edit
+    changelog: Changelog
+    destroy: Delete
+
+  confirms:
+    destroy: 'Are you sure you want to delete this %{type}?'
+
+  nav:
+    back: Back
+    sign_in: Sign in
+    sign_out: Sign out
+    admin:
+      label: Admin
+    configuration:
+      label: Configuration
+    home:
+      label: Home
+      icon: home
+    me:
+      label: Me
+    profile:
+      icon: user
+      label: My Profile
+    audit_security_events:
+      icon: protect
+      label: Security Log
+    audit_versions:
+      icon: history
+      label: Changelog
+    users:
+      icon: privacy
+      label: Users
+
+  or: "or"
+  send_reset_password: Send password reset instructions
+
+  simple_form:
+    buttons:
+      cancel: Cancel
+      preview: Preview
+    placeholders:
+      person:
+        first_name: First Name
+        last_name: Surname
+      user:
+        email: Email Address
+        password: Password
+        password_confirmation: Confirm Password
+
+  # View-specific lazy-lookup translations
+  base_resources:
+    show:
+      back_to_index: Back to %{type}
+  home:
+    show:
+      title: "Home"

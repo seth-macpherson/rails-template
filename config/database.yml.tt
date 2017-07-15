@@ -1,0 +1,36 @@
+# The below config should "just work" on Mac with PostgreSQL
+# installed via Homebrew. If it doesn't work for you, try the
+# UNIX domain socket or TCP socket methods as shown here:
+
+# Connect via domain socket in /tmp (some installs use /var/run/postgresql)
+# host: /tmp
+# username: <%%= ENV["USER"] %>
+# password:
+
+# Connect on a TCP socket.
+# host: localhost
+# port: 5432
+# username: my_postgres_user
+# password: my_postgres_password
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  min_messages: WARNING
+  pool: <%%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  host: <%%= ENV.fetch("POSTGRES_HOSTNAME", "localhost") %>
+  username: <%%= ENV.fetch("POSTGRES_USERNAME", nil) %>
+  password: <%%= ENV.fetch("POSTGRES_PASSWORD", nil) %>
+
+development:
+  <<: *default
+  database: <%%= ENV.fetch("POSTGRES_DATABASE", "<%= app_name %>_development") %>
+
+test:
+  <<: *default
+  database: <%%= ENV.fetch("POSTGRES_DATABASE", "<%= app_name %>_test") %>
+
+# Production configuration comes from the DATABASE_URL environment variable
+# which is automatically registered by rails with the default env config here
+production:
+  <<: *default

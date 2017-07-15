@@ -1,0 +1,8 @@
+- provide(:title, t(".title", type: singular_table_name))
+
+table
+  tbody
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+    tr
+      th = <%= class_name %>.human_attribute_name(:<%= attribute.name %>)
+      td = @<%= singular_table_name %>.<%= attribute.name %>

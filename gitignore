@@ -26,3 +26,6 @@
 # Never check passwords into source control!
 /config/database.yml
 /.env
+
+# Never add the installed modules
+/node_modules

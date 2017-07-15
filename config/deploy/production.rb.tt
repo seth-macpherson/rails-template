@@ -1,6 +1,6 @@
 set :branch, ENV.fetch("CAPISTRANO_BRANCH", "master")
 set :mb_sidekiq_concurrency, 1
 
-server "<%= production_hostname %>",
-       :user => "deployer",
-       :roles => %w(app backup cron db redis sidekiq web)
+server "<%= production_hostname %>", user: "administrator", roles: %w(web app db cron backup redis sidekiq)
+
+set :ssh_options, user: "administrator", forward_agent: true, keys: "~/.ssh/id_rsa"

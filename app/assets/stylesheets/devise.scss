@@ -1,0 +1,10 @@
+body.users-sessions,
+body.users-registrations {
+  main {
+    .middle.aligned.grid {
+      margin-top: 10%;
+      height: 100%;
+      .column { width: 450px !important; }
+    }
+  }
+}

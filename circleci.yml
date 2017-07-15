@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: junglecoders/ruby24-primary:0.0.2
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: app
+    steps:
+      - checkout
+
+      # Install gem dependencies
+      - restore_cache:
+          key: bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path ~/.bundle
+      - save_cache:
+          key: bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/.bundle
+
+      # Setup the database
+      - run: bundle exec rake db:create db:structure:load
+      - run: bundle exec rake db:migrate
+
+      # Install yarn packages and compile
+      - restore_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run: bundle exec rake yarn:install
+      - save_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+
+      # If this takes longer than the Poltergeist timeout it causes a failure
+      # when the first page is hit in PhantomJS. So, pre-compile to avoid.
+      - run: NO_TENANT=1 bundle exec rake assets:precompile
+
+      # Actually run the tests!
+      - run:
+          name: Run RSpec tests
+          command: bundle exec rake spec
+
+      # Store Capybara screenshots. Super helpful if tests failed
+      - store_artifacts:
+          path: ~/code/tmp/capybara
+
+      # Store SimpleCov output
+      - store_artifacts:
+          path: ~/code/coverage
+
+      # Scan for security issues
+      - run:
+          name: Brakeman (security scanner)
+          command: bundle exec brakeman
+
+      # Run Rubocop. Be kind and only fail for warnings and above
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop --fail-level W
+
+      - deploy:
+          name: Deploy to production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              bundle exec cap production deploy
+            else
+              echo "Not deploying branch ${CIRCLE_BRANCH}"
+            fi

@@ -1,0 +1,50 @@
+- if display_sidebar?
+  .ui.thin.sidebar.inverted.vertical.menu
+    / Top-level navigation icon
+    a.item href=root_path
+      i.icon class=t("nav.home.icon")
+      = t("nav.home.label")
+
+    / Example navigation links using the nav_link helper
+    / = nav_link :reports
+    / = nav_link :people
+    / = nav_link :businesses
+
+    / Example of a header with sub-items
+    .item
+      .header = t("nav.configuration.label")
+      .menu
+        / = nav_link :business_categories
+
+    / Example configuration of "admin-only" links
+    .item
+      .header = t("nav.admin.label")
+      .menu
+        - if policy(Audit::SecurityEvent).index?
+          = nav_link :audit_security_events, link: audit_security_events_path
+        - if policy(PaperTrail::Version).index?
+          = nav_link :audit_versions, link: audit_versions_path
+        - if policy(User).index?
+          = nav_link :users
+    .item
+      .header = t("nav.me.label")
+      .menu
+        = nav_link :profile, link: person_path(current_user.person)
+        = link_to destroy_user_session_path, method: :delete, class: "item" do
+          i.sign.out.icon
+          = t("nav.sign_out")
+    / = link_to help_path, class: "item"
+    /   i.help.circle.icon
+    /   = t("nav.help")
+
+/ This is a terrible, disgusting hack to fix the navigation bar in PhantomJS
+/ Semantic UI is using flexbox which isn't working in PhantomJS 2.1
+/ They claim it will be fixed by 2.5. So at that point we can probably remove this
+/ Normally we wouldn't care how something looks in a headless env but it is
+/ causing things to be covered up and tests to fail
+.ui.fixed.inverted.menu
+  - if !Rails.env.production? && request.user_agent.try(:match, /phantomjs/i)
+    = render partial: "layouts/shared/navigation_top"
+  - else
+    .ui.container
+      = render partial: "layouts/shared/navigation_top"

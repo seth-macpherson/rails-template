@@ -1,0 +1,3 @@
+- flash.each do |type, msg|
+  .ui.large.message class=(type.to_s == 'notice' ? 'positive' : 'negative')
+    div = msg

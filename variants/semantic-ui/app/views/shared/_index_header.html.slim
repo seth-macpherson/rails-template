@@ -1,0 +1,15 @@
+// TODO: This isn't the right way to do this. It should be an object that
+// generates HTML. Such as...
+//
+// = index_header @records do |rh|
+//   rh.show_buttons = true
+//   rh.title = 'Awesome stuff'
+// end
+.ui.fitted.secondary.menu
+  .header.item
+    h1.ui.header
+      .content = resource_class.model_name.human(count: 2)
+  .right.menu
+    .item = new_record_button
+
+= paginate @resources_value

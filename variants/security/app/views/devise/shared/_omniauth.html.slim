@@ -1,0 +1,6 @@
+- if devise_mapping.omniauthable?
+  .ui.vertical.labeled.icon.buttons
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to omniauth_authorize_path(resource_name, provider), class: [:ui, :button, omniauth_class(provider)] do
+        i.icon class=omniauth_icon(provider)
+        = t(".sign_in_with_provider", provider: omniauth_label(provider))

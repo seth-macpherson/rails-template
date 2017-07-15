@@ -1,0 +1,22 @@
+h1.ui.dividing.header
+  .content = resource_class.model_name.human(count: 2)
+
+= paginate @resources_value
+
+table.security_event.ui.table
+  - @security_events.each do |se|
+    tr
+      td.event_type class=se.event_type = se.event_type_icon + " " + se.event_type_name
+      td.user_or_comments = se.user_or_comments
+      td.time = timeago se.time
+      td.ip_adress
+        - if se.country.present?
+          i.flag class=se.country.downcase title=se.country
+        = se.ip
+      td.client title=se.user_agent
+        - if se.user_agent.present?
+          span.platform class=se.platform_class = se.platform_icon
+          span.browser = se.user_agent.browser
+          span.version = se.user_agent.version.major
+
+= paginate @resources_value

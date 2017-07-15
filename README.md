@@ -1,19 +1,15 @@
-# mattbrictson/rails-template
+# WebGents/rails-template
 
 ## Description
 
 This is the application template that I use for my Rails 5 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
 
-*For Rails 4.2 projects, use the [rails-42 branch](https://github.com/mattbrictson/rails-template/tree/rails-42).*
-
 ## Requirements
 
 This template currently works with:
 
-* Rails 5.0.x
+* Rails 5.1.x
 * PostgreSQL
-
-If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
 
 ## Installation
 
@@ -23,7 +19,7 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+-m https://raw.githubusercontent.com/WebGents/rails-template/master/template.rb
 ```
 
 ## Usage
@@ -39,7 +35,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+  -m https://raw.githubusercontent.com/WebGents/rails-template/master/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.
@@ -98,13 +94,13 @@ The template will perform the following steps:
 
 I like to use [Postmark][] for transactional email, and so I've included the [postmark-rails][] gem and configured it in `environments/production.rb`. Make sure to sign up for a Postmark account to get an API key, or switch to your own preferred email provider before deploying your app.
 
-#### Bootstrap integration (optional)
+#### Semantic UI integration (optional)
 
-[Bootstrap][]-related features are opt-in. To apply these to your project, answer "yes" when prompted.
+[semantic-ui][]-related features are opt-in. To apply these to your project, answer "yes" when prompted.
 
-* Bootstrap-themed scaffold templates
-* Application layout that includes Bootstrap-style navbar and boilerplate
-* View helpers for generating common Bootstrap markup
+* Semantic UI-themed scaffold templates
+* Application layout that includes Semantic UI-style navbar and boilerplate
+* View helpers for generating common Semantic UI markup
 
 #### Other tweaks that patch over some Rails shortcomings
 
@@ -121,7 +117,7 @@ I like to use [Postmark][] for transactional email, and so I've included the [po
 
 This project works by hooking into the standard Rails [application templates][] system, with some caveats. The entry point is the [template.rb][] file in the root of this repository.
 
-Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `mattbrictson/rails-template` repository to a local temporary directory.
+Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `WebGents/rails-template` repository to a local temporary directory.
 
 This temporary directory is then added to the `source_paths` of the Rails generator system, allowing all of its ERb templates and files to be referenced when the application template script is evaluated.
 
@@ -138,7 +134,6 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [livereload]:https://github.com/guard/guard-livereload
 [rubocop]:https://github.com/bbatsov/rubocop
 [xray-rails]:https://github.com/brentd/xray-rails
-[capistrano-mb]:https://github.com/mattbrictson/capistrano-mb
 [unicorn]:http://unicorn.bogomips.org
 [unicorn-worker-killer]:https://github.com/kzk/unicorn-worker-killer
 [Postmark]:http://postmarkapp.com
@@ -153,7 +148,7 @@ Rails generators are very lightly documented; what you’ll find is that most of
 [shoulda]:https://github.com/thoughtbot/shoulda
 [simplecov]:https://github.com/colszowka/simplecov
 [test_after_commit]:https://github.com/grosser/test_after_commit
-[Bootstrap]:http://getbootstrap.com
+[semantic-ui]:http://semantic-ui.com
 [application templates]:http://guides.rubyonrails.org/generators.html#application-templates
 [template.rb]: template.rb
 [thor]: https://github.com/erikhuda/thor

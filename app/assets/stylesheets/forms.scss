@@ -1,0 +1,33 @@
+form {
+  // span.error {
+  //   background-color: #f00;
+  //   padding: 0.1em 0.5em;
+  //   color: white;
+  //   border-radius: 0.5em
+  // }
+  .field.check_boxes {
+    .ui.checkbox {
+      margin: 0 .5em .5em;
+      display: block;
+    }
+  }
+
+  &.ui.form {
+    .disabled.fields .field,
+    .disabled.field,
+    .field :disabled {
+      opacity: 0.6;
+
+      label { opacity: 1 }
+    }
+
+    .field.date {
+      select { display: inline-block; width: auto }
+    }
+
+    .hint {
+      margin-top: 0.2em;
+      opacity: 0.6
+    }
+  }
+}

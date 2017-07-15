@@ -1,5 +1,5 @@
 # Renders the home page.
 class HomeController < ApplicationController
-  def index
+  def show
   end
 end

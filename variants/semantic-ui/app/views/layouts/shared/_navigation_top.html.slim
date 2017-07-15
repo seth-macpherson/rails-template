@@ -1,0 +1,27 @@
+- if display_sidebar?
+  a.launch.icon.item
+    i.content.icon
+
+= link_to root_path, class: "header item" do
+  i.large.compass.icon
+  = t("site_name")
+
+- if user_signed_in?
+  .right.menu
+    / .item
+    /   form action=search_path method="GET"
+    /     .ui.transparent.inverted.icon.input
+    /       input type="search" placeholder="Search" name="q" id="search"
+    /       i.search.link.icon
+    - if display_user_menu?
+      .ui.dropdown.item
+        i.lock.icon
+        i.dropdown.icon
+        .menu
+          = nav_link :profile, link: person_path(current_user.person), label: current_user.person.name
+          = link_to destroy_user_session_path, method: :delete, class: "item" do
+            i.sign.out.icon
+            = t("nav.sign_out")
+- else
+  .item.right
+    = link_to t("nav.sign_in"), new_user_session_path, class: "ui primary button"

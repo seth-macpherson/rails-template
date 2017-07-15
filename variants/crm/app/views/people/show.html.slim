@@ -1,0 +1,32 @@
+= link_to_index
+
+= render partial: 'shared/record_header', object: @person
+
+.ui.two.column.internally.celled.grid
+  .row
+    .four.wide.column
+      .ui.small.header = attr_name(:email)
+    .twelve.wide.column
+      span = @person.email
+  .row
+    .four.wide.column
+      .ui.small.header = attr_name(:phone)
+    .twelve.wide.column
+      span = @person.phone
+  .row
+    .four.wide.column
+      .ui.small.header = attr_name(:birthday)
+    .twelve.wide.column
+      - if @person.birthday_today?
+        div
+          i.purple.birthday.icon title=t(:happy_birthday)
+          strong = t(:happy_birthday)
+      = @person.birthday_and_age
+  .row
+    .four.wide.column
+      .ui.small.header = attr_name(:user)
+    .twelve.wide.column
+      - if @person.user.present?
+        = link_to_record @person.user
+      - elsif policy(@person).create_user?
+        = link_to t('.create_user'), create_user_person_path(@person), class: 'ui primary button', method: :post

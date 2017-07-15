@@ -1,0 +1,11 @@
+.ui.middle.aligned.center.aligned.grid
+  .column
+    h2.ui.center.teal.header
+      = t('.title')
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      .ui.segment
+        = f.input :email, required: true, autofocus: true, label: false
+        = f.button :submit, t('.submit'), class: 'large fluid'
+    
+    .ui.secondary.segment
+      = render 'devise/shared/links'
