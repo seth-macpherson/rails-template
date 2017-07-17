@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RAILS_REQUIREMENT = "~> 5.1.0"
 
 # Some generators and initialisers will require this to be set
@@ -153,9 +154,14 @@ end
 
 def ask_with_default(question, color, default)
   return default unless $stdin.tty?
+  return default if ENV["HEADLESS"] == "1"
   question = (question.split("?") << " [#{default}]?").join
   answer = ask(question, color)
   answer.to_s.strip.empty? ? default : answer
+end
+
+def yes?(question, default = "yes")
+  ask_with_default(question, :blue, default) =~ /^y(es)?/i
 end
 
 def git_repo_specified?
@@ -173,13 +179,15 @@ def empty_git_repo?
 end
 
 def apply_semantic_ui?
-  ask_with_default("Use Semantic UI gems, layouts, views, etc.?", :blue, "yes")\
-    =~ /^y(es)?/i
+  yes?("Use Semantic UI gems, layouts, views, etc.?")
 end
 
 def apply_security?
-  ask_with_default("Install Devise and Pundit for authentication and authorisation?", :blue, "yes")\
-    =~ /^y(es)?/i
+  yes?("Install Devise and Pundit for authentication and authorisation?")
+end
+
+def apply_reports?
+  yes?("Add reporting engine to generate charts from queries?")
 end
 
 def run_with_clean_bundler_env(cmd)

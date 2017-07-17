@@ -14,7 +14,7 @@ omniauth_providers = {
 }
 configured_providers = []
 omniauth_providers.each do |key, spec|
-  next unless yes? "Add omniauth support for #{spec[:name]}? [y/n]"
+  next unless yes? "Add omniauth support for #{spec[:name]}?"
   insert_into_file "Gemfile", "gem #{spec[:gem]}\n", after: /gem "devise".*\n/
   insert_into_file "config/initializers/devise.rb",
                     %|  config.omniauth :#{key}, ENV["#{spec[:env_key]}_APP_ID"], ENV["#{spec[:env_key]}_APP_SECRET"]\n|,
