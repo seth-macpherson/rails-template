@@ -17,6 +17,7 @@ jobs:
       - restore_cache:
           key: bundle-{{ checksum "Gemfile.lock" }}
 
+      - run: gem install rails
       - run: cd ~/ && rails new testapp -m code/template.rb -d postgresql --skip-turbolinks
 
       - save_cache:
