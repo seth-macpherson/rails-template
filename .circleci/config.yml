@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: junglecoders/ruby24-primary:0.0.2
+        environment:
+          HEADLESS: 1
+          BUNDLE_PATH: ~/.bundle
+      - image: postgres:9.5
+        environment:
+          POSTGRES_USER: app
+    steps:
+      - checkout
+
+      # Install gem dependencies
+      - restore_cache:
+          key: bundle-{{ checksum "Gemfile.lock" }}
+
+      - run: cd ~/ && rails new testapp -m code/template.rb -d postgresql --skip-turbolinks
+
+      - save_cache:
+          key: bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/.bundle
+
+      - run: cd ~/testapp && bundle exec rspec
+
+      # Store Capybara screenshots. Super helpful if tests failed
+      - store_artifacts:
+          path: ~/testapp/tmp/capybara
+
+      # Store SimpleCov output
+      - store_artifacts:
+          path: ~/testapp/coverage
