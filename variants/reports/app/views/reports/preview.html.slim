@@ -1,0 +1,4 @@
+p
+  em Data current as of #{l Time.current, format: :long}
+
+= render 'data_table', fields: @data[:fields], values: @data[:values]

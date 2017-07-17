@@ -1,0 +1,10 @@
+table.ui.very.compact.celled.selectable.table
+  thead
+    tr
+      - fields.each do |f|
+        th = f.titleize
+  tbody
+    - values.each do |row|
+      tr
+        - row.each do |val|
+          td = val

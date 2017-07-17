@@ -1,0 +1,19 @@
+= simple_form_for @report do |f|
+  .ui.segments
+    .ui.segment
+      .ui.two.column.stackable.grid
+        .column
+          = f.input :title
+          = f.input :description, as: :text, input_html: { rows: 3 }
+          = f.input :published, as: :boolean, wrapper: :ui_toggle_checkbox
+        .column
+          = f.input :chart_type, as: :select, collection: @chart_type_options, include_blank: '-- None --'
+          = f.input :settings, as: :json
+    .ui.segment
+      = f.input :query, as: :text, input_html: { class: 'codemirror', data: { cmlang: 'text/x-pgsql' } }
+    .ui.bottom.attached.secondary.segment
+      = f.button :submit
+      = link_to I18n.t('simple_form.buttons.preview'), [:preview, :reports], class: 'ui orange preview button'
+      = f.button :cancel
+
+#preview

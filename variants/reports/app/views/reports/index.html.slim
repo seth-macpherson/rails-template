@@ -1,0 +1,19 @@
+= render 'shared/index_header'
+
+table.ui.table
+  thead
+    tr
+      th = attr_name(:title)
+      th = attr_name(:chart_type)
+      th = attr_name(:description)
+      - if policy(:report).edit?
+        th.center.aligned = attr_name(:published)
+  tbody
+    - @reports.each do |report|
+      tr
+        td = link_to_record report
+        td = report.chart_type
+        td = report.description
+        - if policy(report).edit?
+          td.center.aligned
+            span.ui.empty.circular.label class=[report.published ? 'green' : 'orange']

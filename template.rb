@@ -41,6 +41,7 @@ def apply_template!
   apply "variants/crm/template.rb"
   apply "variants/semantic-ui/template.rb" if apply_semantic_ui?
   apply "variants/security/template.rb" if apply_security?
+  apply "variants/reports/template.rb" if apply_reports?
 
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"

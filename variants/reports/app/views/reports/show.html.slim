@@ -1,0 +1,16 @@
+= link_to_index
+
+= render partial: 'shared/record_header', object: @report
+
+- if @report.unpublished? && policy(@report).edit?
+  div.ui.warning.message
+    p = t('.unpublished')
+
+- if @result.kind_of? ActiveRecord::ActiveRecordError
+  div.ui.error.message
+    .header = t('.query_error')
+    p = @result.message
+- else
+  = send(@render_method, @result.values, @options)
+
+  = render 'data_table', fields: @result.fields, values: @result.values

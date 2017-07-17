@@ -1,0 +1,14 @@
+wb = xlsx_package.workbook
+
+styles = xlsx_package.workbook.styles
+header_style = styles.add_style bg_color: "00",
+                                fg_color: "FF",
+                                bold: true
+
+# Header info for the survey, in vertical format
+wb.add_worksheet(name: 'Survey') do |sheet|
+  sheet.add_row @result.fields, style: header_style
+  @result.values.each do |row|
+    sheet.add_row row
+  end
+end
