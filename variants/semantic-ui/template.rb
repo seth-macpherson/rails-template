@@ -8,6 +8,7 @@ end
 
 copy_file "app/assets/javascripts/semantic_ui_components.js"
 copy_file "app/assets/javascripts/semantic_ui_initializers.es6"
+copy_file "app/assets/javascripts/navigation.es6"
 copy_file "app/assets/stylesheets/semantic_ui_components.scss"
 copy_file "app/helpers/ui_helper.rb"
 copy_file "app/views/layouts/application.html.slim", force: true
