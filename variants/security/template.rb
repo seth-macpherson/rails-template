@@ -29,17 +29,17 @@ migration "db/migrate/create_identities.rb"
 migration "db/migrate/create_user_roles.rb"
 migration "db/migrate/create_audit_security_events.rb"
 
-route <<-RUBY.strip_heredoc
+route <<-RUBY
   devise_for :users, controllers: {
-      confirmations:      "users/confirmations",
-      registrations:      "users/registrations",
-      sessions:           "users/sessions"
-    }
-    resources :users do
-      member do
-        get :send_reset_password
-      end
+    confirmations:      "users/confirmations",
+    registrations:      "users/registrations",
+    sessions:           "users/sessions"
+  }
+  resources :users do
+    member do
+      get :send_reset_password
     end
+  end
 RUBY
 
 insert_into_file  "config/routes.rb",

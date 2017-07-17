@@ -202,4 +202,13 @@ def migration(filename)
   @last_timeref = timeref
 end
 
+# Redefine route to
+# 1) Add routes to the bottom of the route file
+# 2) More cleanly support multi-line routes
+def route(str)
+  str = str.chomp
+  str = "  #{str}" unless str =~ /\n/
+  insert_into_file "config/routes.rb", "#{str}\n", before: /^end\n/
+end
+
 apply_template!

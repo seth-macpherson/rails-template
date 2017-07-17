@@ -34,11 +34,11 @@ apply "config/environments/production.rb"
 apply "config/environments/test.rb"
 template "config/environments/staging.rb.tt"
 
-route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)
+route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console)
 
-route <<-RUBY.strip_heredoc
+route <<-RUBY
   namespace :audit do
-      get 'versions', to: 'versions#index'
-      get 'versions/:item_type/:item_id', to: 'versions#index', as: :record_versions
-    end
+    get 'versions', to: 'versions#index'
+    get 'versions/:item_type/:item_id', to: 'versions#index', as: :record_versions
+  end
 RUBY
