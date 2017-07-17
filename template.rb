@@ -123,7 +123,7 @@ def assert_postgresql
   return if IO.read("Gemfile") =~ /^\s*gem ['"]pg['"]/
   fail Rails::Generators::Error,
        "This template requires PostgreSQL, "\
-       "but the pg gem isn’t present in your Gemfile."
+       "but the pg gem isn't present in your Gemfile."
 end
 
 # Mimic the convention used by capistrano-mb in order to generate
