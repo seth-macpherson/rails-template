@@ -20,6 +20,7 @@ To make this the default Rails application template on your system, create a `~/
 ```
 -d postgresql
 -m https://raw.githubusercontent.com/WebGents/rails-template/master/template.rb
+--skip-turbolinks
 ```
 
 ## Usage
