@@ -6,7 +6,6 @@ jobs:
       - image: junglecoders/ruby24-primary:0.0.3
         environment:
           HEADLESS: 1
-          BUNDLE_PATH: ~/.bundle
       - image: postgres:9.5
         environment:
           POSTGRES_USER: app
