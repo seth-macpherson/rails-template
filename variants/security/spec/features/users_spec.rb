@@ -13,7 +13,7 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("Sent password reset instructions to #{user.email}", wait: 3)
   end
 
-  scenario "signing in as a disabled user", js: true do
+  scenario "signing in as a disabled user" do
     user = create :user, disabled: true
     visit new_user_session_path
 
