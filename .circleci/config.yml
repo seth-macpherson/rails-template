@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: junglecoders/ruby24-primary:0.0.2
+      - image: junglecoders/ruby24-primary:0.0.3
         environment:
           HEADLESS: 1
           BUNDLE_PATH: ~/.bundle
@@ -12,8 +12,6 @@ jobs:
           POSTGRES_USER: app
     steps:
       - checkout
-
-      - run: gem install rails
 
       - restore_cache:
           key: bundle-v1.0
