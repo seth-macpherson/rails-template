@@ -13,19 +13,10 @@ jobs:
     steps:
       - checkout
 
-      # Install gem dependencies
-      - restore_cache:
-          key: bundle-{{ checksum "Gemfile.lock" }}
-
       - run: gem install rails
       - run: cd ~/ && rails new testapp -m code/template.rb -d postgresql --skip-turbolinks
 
-      - save_cache:
-          key: bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ~/.bundle
-
-      - run: cd ~/testapp && bundle exec rspec
+      - run: cd ~/testapp && NO_TENANT=1 bundle exec rake assets:precompile && bundle exec rspec
 
       # Store Capybara screenshots. Super helpful if tests failed
       - store_artifacts:
