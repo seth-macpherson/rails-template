@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: junglecoders/ruby24-primary:0.0.3
+      - image: junglecoders/ruby24-primary:0.0.4
         environment:
           HEADLESS: 1
       - image: postgres:9.5
@@ -22,7 +22,7 @@ jobs:
       - save_cache:
           key: bundle-v1.0
           paths:
-            - ~/.bundle
+            - /usr/local/bundle
 
       # Store Capybara screenshots. Super helpful if tests failed
       - store_artifacts:
