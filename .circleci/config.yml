@@ -14,9 +14,18 @@ jobs:
       - checkout
 
       - run: gem install rails
+
+      - restore_cache:
+          key: bundle-v1.0
+
       - run: cd ~/ && rails new testapp -m code/template.rb -d postgresql --skip-turbolinks
 
       - run: cd ~/testapp && NO_TENANT=1 bundle exec rake assets:precompile && bundle exec rspec
+
+      - save_cache:
+          key: bundle-v1.0
+          paths:
+            - ~/.bundle
 
       # Store Capybara screenshots. Super helpful if tests failed
       - store_artifacts:
