@@ -28,7 +28,7 @@ RSpec.feature "Users", type: :feature do
     user = create(:user)
 
     visit "/"
-    click_link "Sign in"
+    expect(page).to have_current_path new_user_session_path
     fill_in "Email Address", with: user.email
     fill_in "Password", with: user.password
     click_button I18n.t("devise.sessions.new.submit")
