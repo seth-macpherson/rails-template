@@ -39,7 +39,7 @@ module ApplicationHelper
     link_to path do
       [
         content_tag(:i, nil, class: 'arrow left icon'),
-        t(".back_to_index", type: type.model_name.human(count: 2))
+        t(:back_to_index, type: type.model_name.human(count: 2))
       ].sum
     end
   end

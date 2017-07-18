@@ -50,6 +50,7 @@ en:
 
   or: "or"
   send_reset_password: Send password reset instructions
+  back_to_index: Back to %{type}
 
   simple_form:
     buttons:
@@ -65,9 +66,6 @@ en:
         password_confirmation: Confirm Password
 
   # View-specific lazy-lookup translations
-  base_resources:
-    show:
-      back_to_index: Back to %{type}
   home:
     show:
       title: "Home"
