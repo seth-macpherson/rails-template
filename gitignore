@@ -29,3 +29,6 @@
 
 # Never add the installed modules
 /node_modules
+
+# Ignore spec history
+/spec/examples.txt
