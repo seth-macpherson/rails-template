@@ -6,4 +6,5 @@ Rails.application.config.generators do |g|
   g.helper              false
   g.scaffold_stylesheet false
   g.view_specs          false
+  g.system_tests        false
 end
