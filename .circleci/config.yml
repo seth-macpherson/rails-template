@@ -6,6 +6,7 @@ jobs:
       - image: junglecoders/ruby24-primary:0.0.4
         environment:
           HEADLESS: 1
+          BUNDLE_PATH: ~/.bundle
       - image: postgres:9.5
         environment:
           POSTGRES_USER: app
@@ -13,16 +14,16 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: bundle-v1.0
+          key: rails-template-bundle-v2
 
       - run: cd ~/ && rails new testapp -m code/template.rb -d postgresql --skip-turbolinks
 
       - run: cd ~/testapp && NO_TENANT=1 bundle exec rake assets:precompile && bundle exec rspec
 
       - save_cache:
-          key: bundle-v1.0
+          key: rails-template-bundle-v2
           paths:
-            - /usr/local/bundle
+            - ~/.bundle
 
       # Store Capybara screenshots. Super helpful if tests failed
       - store_artifacts:
