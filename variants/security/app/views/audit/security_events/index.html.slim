@@ -17,6 +17,6 @@ table.security_event.ui.table
         - if se.user_agent.present?
           span.platform class=se.platform_class = se.platform_icon
           span.browser = se.user_agent.browser
-          span.version = se.user_agent.version.major
+          span.version = se.user_agent.version
 
 = paginate @resources_value

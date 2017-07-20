@@ -46,16 +46,25 @@ insert_into_file  "config/routes.rb",
                   "    resources :security_events, only: :index\n",
                   after: /namespace :audit.+\n/
 
+insert_into_file  "config/routes.rb", <<-RUBY, after: /resources :people do\n/
+    member do
+      post :create_user
+    end
+  end
+RUBY
+
 insert_into_file  "app/controllers/home_controller.rb",
                   "    authorize :home, :show?\n",
                   after: /def show\n/
 
 unless configured_providers.empty?
   copy_file "app/controllers/users/omniauth_callbacks_controller.rb"
+  copy_file "spec/controllers/users/omniauth_callbacks_controller_spec.rb"
   insert_into_file "config/routes.rb",
                     "    omniauth_callbacks: 'users/omniauth_callbacks',\n",
                     after: /devise_for :users.+\n/
   insert_into_file  "app/models/user.rb",
                     ",\n         :omniauthable, omniauth_providers: Devise.omniauth_providers",
                     after: /:validatable(?=\n)/m
+  append_to_file ".env.test", "AUDIT_SECURITY_EVENTS=false"
 end

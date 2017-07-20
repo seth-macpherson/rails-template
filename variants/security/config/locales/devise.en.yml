@@ -30,7 +30,7 @@ en:
       omniauth:
         sign_in_with: "Sign in with:"
         sign_in_with_provider: "Sign in with %{provider}"
-    omniauith:
+    omniauth:
       google_oauth2: Google
       github: GitHub
     mailer:
