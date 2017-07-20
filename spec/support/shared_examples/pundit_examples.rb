@@ -14,8 +14,6 @@ end
 RSpec.shared_examples_for 'readonly for' do |role|
   let(:user) { role.present? ? stubbed_user(role) : nil }
 
-  it { is_expected.to permit_action :index }
-  it { is_expected.to permit_action :show }
   it { is_expected.to forbid_new_and_create_actions }
   it { is_expected.to forbid_edit_and_update_actions }
   it { is_expected.to forbid_action :destroy }
