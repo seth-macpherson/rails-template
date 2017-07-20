@@ -51,6 +51,18 @@ en:
   or: "or"
   send_reset_password: Send password reset instructions
   back_to_index: Back to %{type}
+  actions:
+    created: 'Created'
+    updated: 'Updated'
+    destroyed: 'Destroyed'
+  action_by: '%{action} by'
+  by_person: 'by %{person}'
+  unknown: 'Unknown'
+  expand_all: 'Expand all'
+  collapse_all: 'Collapse all'
+  no_value: 'No value'
+  blank_value: 'Blank'
+  see_more: 'See more'
 
   simple_form:
     buttons:
@@ -69,3 +81,18 @@ en:
   home:
     show:
       title: "Home"
+  # For forms that inherit from BaseResourcesController, there's usually no
+  # reason to have their own views for 'edit' and 'new' so they'll use the
+  # standard one. So, this is the text for those generic forms that live in
+  # app/views/base_resources
+  base_resources:
+    new:
+      heading: 'New %{type}'
+    edit:
+      heading: 'Editing %{type}'
+    create:
+      notice: '%{type} successfully created.'
+    update:
+      notice: '%{type} successfully updated.'
+    destroy:
+      notice: '%{type} successfully deleted.'
