@@ -17,6 +17,8 @@ def apply_template!
   remove_file "README.rdoc"
 
   template "example.env.tt"
+  create_file ".env.production"
+  create_file ".env.test"
   copy_file "gitignore", ".gitignore", force: true
   Dir.mkdir(".circleci")
   copy_file "circleci.yml", ".circleci/config.yml"
