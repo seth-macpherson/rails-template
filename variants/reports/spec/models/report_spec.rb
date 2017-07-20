@@ -12,7 +12,7 @@ RSpec.describe Report, type: :model do
   end
 
   describe 'settings=' do
-    subject { record.settings = value; record.settings }
+    subject { record.tap { |r| r.settings = value }.settings }
     let(:record) { build :report }
     context 'with valid json in string format' do
       let(:value) { '{ "name": "Report", "hits": 3 }' }
