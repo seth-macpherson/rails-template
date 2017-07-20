@@ -5,7 +5,7 @@ class Person < ApplicationRecord
 
   # has_one :user
 
-  validates :email, uniqueness: true, case_sensitive: false, allow_nil: true
+  validates :email, uniqueness: { case_sensitive: false, allow_nil: true }
   validates :first_name, presence: true
 
   # before_destroy :ensure_no_user
