@@ -1,9 +1,13 @@
-- provide(:title, t(".title", type: singular_table_name))
+- provide(:title, t(".title", type: <%= class_name %>.model_name.human))
+
+= link_to_index
+
+= render partial: "shared/record_header", object: @<%= singular_table_name %>
 
 table
   tbody
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
     tr
-      th = <%= class_name %>.human_attribute_name(:<%= attribute.name %>)
+      th = attr_name(:<%= attribute.name %>)
       td = @<%= singular_table_name %>.<%= attribute.name %>
-<% end %>
+<% end -%>

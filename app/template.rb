@@ -16,6 +16,7 @@ copy_file "app/views/layouts/application.html.slim", force: true
 copy_file "app/views/layouts/base.html.slim"
 copy_file "app/views/layouts/shared/_flash.html.slim"
 copy_file "app/views/home/show.html.slim"
+directory "app/views/base_resources"
 empty_directory_with_keep_file "app/jobs"
 empty_directory_with_keep_file "app/services"
 
