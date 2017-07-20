@@ -1,3 +1,6 @@
+require:
+  - rubocop/rspec/focused
+
 AllCops:
   Include:
     - Rakefile
@@ -12,14 +15,22 @@ AllCops:
     - vendor/**/*
     - bin/*
     - node_modules/**/*
+    - lib/**/templates/*.rb
 
 Rails:
+  Enabled: true
+
+RSpec/Focused:
   Enabled: true
 
 # When seeding you want to output information to the console
 Rails/Output:
   Exclude:
     - db/seeds.rb
+
+Style/FileName:
+  Exclude:
+    - Capfile
 
 # Use the standard github rubocop rules and rails rules
 inherit_from:
