@@ -21,8 +21,6 @@ gem "pg"<%= gemfile_requirement("pg") || ', "~> 0.18"' %>
 gem "pgcli-rails"
 gem "rails", "<%= Rails.version %>"
 gem "redis-namespace"
-gem "rubocop", ">= 0.44.0", require: false
-gem "rubocop-rspec-focused", require: false
 gem "sass-rails"<%= gemfile_requirement("sass-rails") %>
 gem "secure_headers", "~> 3.0"
 gem "sidekiq", ">= 4.2.0"
@@ -65,6 +63,7 @@ group :development do
   gem "rbnacl", "~> 3.4", require: false
   gem "rbnacl-libsodium", require: false
   gem "rubocop", ">= 0.44.0", require: false
+  gem "rubocop-rspec-focused", require: false
   gem "spring"
   gem "sshkit", "~> 1.8", require: false
 <% if gemfile_requirement("spring-watcher-listen") -%>
