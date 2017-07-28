@@ -114,6 +114,8 @@ def assert_valid_options
     edge: false
   }
   valid_options.each do |key, expected|
+    puts "key: #{key}"
+    puts "expected: #{expected}"
     next unless options.key?(key)
     actual = options[key]
     unless actual == expected
@@ -187,7 +189,7 @@ def apply_semantic_ui?
 end
 
 def apply_security?
-  yes?("Install Devise and Pundit for authentication and authorisation?")
+  yes?("Install Devise and Pundit for authentication and authorization?")
 end
 
 def apply_reports?
